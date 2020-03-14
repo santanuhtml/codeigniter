@@ -1,0 +1,5 @@
+Framework = List of reusable libraries.
+MVC
+M = Model       [All database related task done here]
+V = View        [HTML/Front page related task done here, ex:form, image]
+C = Controller  [It controls the communication between Model and View]
