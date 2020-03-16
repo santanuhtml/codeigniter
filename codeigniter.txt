@@ -3,3 +3,475 @@ MVC
 M = Model       [All database related task done here]
 V = View        [HTML/Front page related task done here, ex:form, image]
 C = Controller  [It controls the communication between Model and View & all business logic of mvc written here.]
+
+
+Folders in codeigniter:
+
+application  [We will work our most of the work in it.]
+system       [Never touch this folder]
+user_guide   [documentation of codeigniter]
+   -> index.html
+index.php
+
+Mostly used folder on it:
+
+application
+   -> config
+   -> controllers
+   -> models
+   -> views
+
+--------------------------
+Welcome.php
+--------------------------
+Note: When we run codeigniter3 folder on localhost
+we see "Welcome to CodeIgniter!" message which comes
+from:
+------------
+application -> controllers -> Welcome.php
+------------
+Where html file "welcome_message.php" fetching from:
+------------
+application -> views -> welcome_message.php
+------------
+Here default controller is wecome, this why we
+see this welcome message when we run codeigniter3
+we may check this form:
+------------
+application -> config -> routes.php
+------------
+$route['default_controller'] = 'welcome'; 
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+//we may change default controller to change this "welcome"
+
+--------------------------
+Change default controller
+--------------------------
+step1:
+create a file called "test.php" under:
+application -> controllers -> test.php
+
+step2:
+Copy Welcome.php file code under test.php file
+and edit it:
+------------
+
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class test extends CI_Controller {     // here welcome replaced by test
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function index()
+	{
+		echo "test";      // this line comes in place of below line.
+		//$this->load->view('welcome_message');
+	}
+}
+
+------------
+step3:
+Now just visit: 
+application -> config -> routes.php
+and edit the $route['default_controller'] = 'welcome';
+to
+$route['default_controller'] = 'test';
+
+--------------------------
+How to work
+--------------------------
+here code of welcome.php is
+------------
+
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Welcome extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function index()
+	{
+		$this->load->view('welcome_message');
+	}
+	public function sum($par1, $par2)
+	{
+		echo $par1+$par2;
+	}
+}
+
+------------
+NOW IT WORKS LIKE
+------------
+projectName/index.php/controller/method/parameter
+------------
+here 'parameter' is default
+example1:
+------------
+codeigniter3/index.php/welcome/index
+------------
+where 'index' is method under controller 'welcome'
+
+example2 with parameter:
+------------
+http://localhost/codeigniter3/index.php/welcome/sum/2/2
+------------
+here under 'sum' is another method under controller 'welcome',
+which have two parameter.
+
+
+--------------------------
+How to configure
+--------------------------
+STEP1:
+here our BASE URL is:
+http://localhost/codeigniter3/
+
+and we have visit the page 'config.php':
+application->config->config.php
+
+and enter our BASE URL in:
+------------
+$config['base_url'] = '';
+------------
+$config['base_url'] = 'http://localhost/codeigniter3/';
+------------
+
+STEP2:
+Now we have to create our database
+here our database name is "ci_beginners"
+After creative our database we will insert it in:
+application->config->database.php
+Example:
+'hostname' => 'localhost',
+'username' => 'root',
+'password' => '',
+'database' => 'ci_beginners',
+'dbdriver' => 'mysqli',
+'dbprefix' => '',
+......
+
+STEP3:
+To check it correct configure:
+application->config->autoload.php
+------------
+$autoload['libraries'] = array();
+------------
+here we add 'database'
+------------
+$autoload['libraries'] = array('database');
+------------
+After this if our BASE URL run proprely then our
+configuretion is done.
+
+--------------------------
+Controller
+1.how to create Controller
+2.how to use Controller
+--------------------------
+note:
+When we create a new Controller file in codeigniter 3
+its first letter will be UPPERCASE.
+Example:
+Article.php
+Now we will start code under Article.php
+------------
+<?php
+class Article extends CI_controller{
+  /* Default Method */
+   public function index(){
+	echo "Hello World";
+   }
+}
+?>
+------------
+Note:
+i.   here controller file name is "Article.php"
+     so controller name is "Article"
+
+ii.  all controller class will be extends from CI_controller
+
+iii. here index is a default method of each controller.
+     so when we run the controller "Article" then
+     index method will be display.
+     Example:
+     http://localhost/codeigniter3/index.php/article
+
+iv. Now we will create another method called "newTestMethod"
+
+------------
+<?php
+class Article extends CI_controller{
+/* Default Method */
+  public function index(){
+     echo "Hello This is Default method of controller Article";
+  }
+	
+  public function newTestMethod(){
+     echo "This is another controller called newTestMethod";
+  }
+}
+?>
+------------
+Note:
+i.   To access this method our BASE URL will be:
+     http://localhost/codeigniter3/index.php/article/newTestMethod
+
+ii.  but if we don't use "/newTestMethod" only use this:
+     http://localhost/codeigniter3/index.php/article/
+     then our default method "index"
+     will be display.
+
+--------------------------
+Views
+--------------------------
+In codeigniter to view any page we need to keep this 
+file under 'view' folder and have to call this file
+under the method:
+
+STEP1:
+Create a view file called "test.php" under views folder 
+and basic code is:
+
+test.php
+------------
+<h1>Hello</h1>
+<p>Test view file under views folder.</p>
+------------
+
+STEP2:
+Now call this view file called "test.php" in a controller
+called "test.php" under index method using:
+$this->load->view('test');
+
+where 'test' is the view file called "test.php" which is 
+created under views folder.
+CODE:
+------------
+<?php
+class Article extends CI_controller{
+  /* Default Method */
+  public function index(){
+    $this->load->view('test');
+  }
+  public function newTestMethod(){
+    echo "This is another controller called newTestMethod";
+  }
+}
+?>
+------------
+to run this type this:
+http://localhost/codeigniter3/index.php/article/
+Note:here we don't need this method name because we 
+call this view page under index method.
+
+--------------------------
+Display value under Views
+--------------------------
+STEP1:
+We may add some of data under index method.
+code given below:
+------------
+<?php
+class Article extends CI_controller{
+ /* Default Method */
+ public function index(){
+
+    $data = array();
+    $name = "santanu chowdhury";
+    $email = "santanuchowdhury04@gmail.com";
+    $data['name'] = $name;
+    $data['email'] = $email;
+
+    $data['nameArray'] = array('santanu','sourav','kaustav');
+
+    $this->load->view('test', $data);
+ }
+
+ public function newTestMethod(){
+    echo "This is another controller called newTestMethod";
+ }
+}
+?>
+------------
+Note:
+$this->load->view('test', $data);
+in this line of code we first pass the view page
+name called 'test' and pass the variable name 
+$data to display value.
+
+STEP2:
+To display this data on our view page we have to
+update our test.php file under views folder
+test.php
+------------
+<h1>Hello</h1>
+<p>Test view file under views folder.</p>
+<p>Name: <?php echo $name; ?></p>
+<p>Email: <?php echo $email; ?></p>
+<br><br>
+<p>
+<?php 
+  foreach ($nameArray as $key => $value) {
+     echo $value ."<br>";
+  }
+?>
+</p>
+------------
+NOTE:
+So in codeigniter if we display any page we need
+to keep this file under 'views' folder and call
+this file in controller using this code:
+
+$this->load->view('fileName', $dataVariableName);
+
+
+--------------------------
+Model
+--------------------------
+i.   Under Model we will use database related work.
+ii.  When we create a new modal file in codeigniter 3
+     its first letter will be UPPERCASE.
+     Example: application/models/Article_model.php
+iii. code is given below
+STEP1:
+------------
+<?php
+class Article_model extends CI_model{
+  public function articles(){
+     $articles[0] = "This is #1 dummy articles";
+     $articles[1] = "This is #2 dummy articles";
+     $articles[2] = "This is #3 dummy articles";
+     return $articles;
+  }
+}
+?>
+------------
+
+STEP2:
+Now we have to fetch this data on controller file "Article.php"
+
+TO LOAD THIS DATA:
+$this->load->model('Article_model');
+
+TO USE THIS DATA:
+// $this->Article_model->articles();
+here 
+i.    'Article_model' is the model file name
+ii.   'articles()' is the method name which value we want.
+iii.  now we keep the data in a variable '$articles' and
+      to display this data [which is in ARRAY format] we 
+      insert in $data[]. SO FINAL CODE TO USE THIS DATA
+
+
+//$this->Article_model->articles();
+$articles= $this->Article_model->articles();
+$data['articleArray'] = $articles; //$data = array(); we did this step above this
+
+
+With this step code in Article.php will be:
+------------
+<?php
+class Article extends CI_controller{
+/* Default Method */
+  public function index(){
+    $data = array();
+
+    //TO LOAD THIS DATA:
+    $this->load->model('Article_model');
+    //TO USE THIS DATA:
+    $articles= $this->Article_model->articles();
+    $data['articleArray'] = $articles; 
+
+    $this->load->view('test', $data);
+  }
+
+  public function newTestMethod(){
+   echo "This is another controller called newTestMethod";
+  }
+}
+?>
+------------
+So the Updated code entair Article.php page
+Article.php
+------------
+<?php
+class Article extends CI_controller{
+/* Default Method */
+  public function index(){
+    $data = array();
+    $name = "santanu chowdhury";
+    $email = "santanuchowdhury04@gmail.com";
+    $data['name'] = $name;
+    $data['email'] = $email;
+
+    $data['nameArray'] = array('santanu','sourav','kaustav');
+
+    //TO LOAD THIS DATA:
+    $this->load->model('Article_model');
+    //TO USE THIS DATA:
+    $articles= $this->Article_model->articles();
+    $data['articleArray'] = $articles; 
+
+    $this->load->view('test', $data);
+  }
+
+  public function newTestMethod(){
+   echo "This is another controller called newTestMethod";
+  }
+}
+?>
+------------
+Summery:
+1:  first we have to create a new file called "Article_model.php"
+    under the 'models' folder.
+    application/models/Article_model.php
+
+2:  On this "Article_model.php" define a method called "articles()".
+
+3:  After this we call this "Article_model.php" model file in our
+    controller page called "Article.php" using this:
+    $this->load->model('Article_model');
+
+4:  After load this model we call this perticular method called "articles()"
+    of this model using this:
+    //$this->Article_model->articles();
+    and keep this data inside the another variable.
+    $articles= $this->Article_model->articles();
+    $data['articleArray'] = $articles; 
+
+5:  Finally we print this in our view page called "test.php"
+
+
+
+
+	
