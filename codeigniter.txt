@@ -471,7 +471,266 @@ Summery:
 
 5:  Finally we print this in our view page called "test.php"
 
+--------------------------
+Active Record Class / Query Builder Class
+--------------------------
+Location:
+codeigniter3/user_guide/database/query_builder.html
+
+Using Active Record Class / Query Builder Class we can insert/fetch
+data form Data Base with help of methods.
+Advantage:
+i.   Our Project will be DATABASE INDEPENDENT
+     We can change our Database any time. Example: Here we useing 'mysqli'
+     and if client says they want to shift the database any other database
+     like cubrid, ibase, mssql, mysql, oci8, we can eassyly shift our database
+     by changing the database name in 'database.php' :
+
+     'database' => 'ci_beginners',
+     'dbdriver' => 'mysqli',
+
+ii.  skip mysql injection
 
 
+------------
+Creating Table in 'ci_beginners' database
+------------
+i.   Creating a Tabel under 'ci_beginners' called 'users_table' with
+     coloms:3
 
-	
+ii.  Name - id       |  Index - PRIMARY      |  A_I - [OK]
+     Name - name     |  Type - VARCHAR       |  Length - 100
+     Name - email    |  Type - VARCHAR       |  Length - 100
+     
+                                             		SAVE
+
+iii. Insert some of value on this table called 'users_table' like:
+     Santanu Chowdhury    |  santanuchowdhury04@gmail.com
+     Sourav Karanjai      |  souravkaranjai@gmail.com
+     kaustav Dhar	  |  kaustavdhar@gmail.com
+
+
+------------
+Connect Database and fetching Data
+------------
+ At first we have to create a new method in
+ "Article_model.php" file under 'model' folder
+ to connect database and get data from tabel 'users'
+------------
+public function example(){
+  $users = $this->db->get('users_table')->result_array();
+  return $users;
+}
+------------
+Note: using 'result_array()' we the data on array format.
+so the updated code of "Article_model.php" given below:
+------------
+<?php
+class Article_model extends CI_model{
+   public function articles(){
+      $articles[0] = "This is #1 dummy articles";
+      $articles[1] = "This is #2 dummy articles";
+      $articles[2] = "This is #3 dummy articles";
+      return $articles;
+   }
+   //connect with database
+   public function example(){
+     $users = $this->db->get('users')->result_array();
+     return $users;
+   }
+
+}
+?>
+------------
+Now on controller under a method we will call the 
+model page display the data:
+
+to do this we will
+i.    load the method page:
+      $this->load->model('Article_model');
+
+ii.   fetching data from the method of 'Article_model.php'
+      $users= $this->Article_model->example();
+
+iii.  print_r($users);  //to display
+
+SO, UPDATED CODE
+------------
+
+<?php
+class Article extends CI_controller{
+  /* Default Method */
+  public function index(){
+  $data = array();
+  $name = "santanu chowdhury";
+  $email = "santanuchowdhury04@gmail.com";
+  $data['name'] = $name;
+  $data['email'] = $email;
+
+  $data['nameArray'] = array('santanu','sourav','kaustav');
+
+  //TO LOAD THIS DATA:
+  $this->load->model('Article_model');
+  $users= $this->Article_model->example();
+  print_r($users);
+
+		
+  //TO USE THIS DATA:
+   $articles= $this->Article_model->articles();
+   $data['articleArray'] = $articles; 
+
+    $this->load->view('test', $data);
+  }
+
+  public function newTestMethod(){
+    echo "This is another controller called newTestMethod";
+  }
+}
+?>
+
+--------------------------
+DISPLAY DATA FORM DATABASE TABLE 
+TO VIEW PAGE TABLE
+[BOOK DETAILS]
+--------------------------
+STEP1:
+Creating a new table called "book_table"
+
+STEP2:
+Add value on it
+
+STEP3:
+Creating a new models page "Book_model.php" 
+to connect table and get data.
+*** Uppercase first letter
+Book_model.php
+------------
+<?php
+  class Book_model extends CI_model{
+     public function bookList(){
+     $books = $this->db->get('book_table')->result_array();
+     return $books;
+    }
+  }	
+?>
+------------
+Note:
+i.    Here model file name is "Book_model.php" 
+      so, model class name is Book_model
+
+ii.   Here "bookList()" is our new created method
+
+iii.  Here "book_table" is the table name which value
+      we get in array format using "result_array()"
+
+STEP4:
+Now we will create new controller page "Book.php"
+*** Uppercase first letter
+book.php
+------------
+<?php
+ class Book extends CI_controller{
+  /* Default Method */
+  public function index(){
+     //To Load Model Page
+     $this->load->model('Book_model');
+     //Select method where data have
+     $books= $this->Book_model->bookList();
+     print_r($books); //use it for testing
+   }
+ }
+?>
+------------
+Note: now test it:
+codeigniter3/index.php/book
+
+STEP5:
+Now create a view page "book.php" to display data properly
+under html
+
+STEP6:
+Before start to code under view page, we need to some of
+setup under Controller "Book.php" page.
+
+i.   Need to insert data of "$books" in an ARRAY
+     called $data['books']
+
+ii.  Connect newly create view page "book.php" with
+     the controller
+
+So Updated code of controller "Book.php" is:
+
+Book.php
+------------
+<?php
+class Book extends CI_controller{
+   /* Default Method */
+   public function index(){
+     //To Load Model Page
+     $this->load->model('Book_model');
+     //Select method where data have
+     $books= $this->Book_model->bookList();
+    //print_r($books); //use it for testing
+    //insert data of "$books" in an ARRAY
+    $data['books'] = $books;
+    //Connect view page with $data
+    $this->load->view('book',$data);
+  }
+}
+?>
+------------	
+
+STEP7:
+Now we display our Database data under view page.
+
+book.php
+------------
+<!-- testing -->
+<?php
+print_r($books);
+?>
+------------
+
+STEP8:
+Finally we call Database data under tabel
+
+book.php
+------------
+<html>
+  <head>
+    <title>Book List</title>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+	<td>Book ID</td>
+	<td>Book Name</td>
+	<td>Book Author</td>
+	<td>Book Price</td>
+      </tr>
+      <?php
+	if(!empty($books)){
+	   foreach ($books as $book) {
+	?>
+	<tr>
+	   <td><?php echo $book['id']; ?></td>
+	   <td><?php echo $book['name']; ?></td>
+	   <td><?php echo $book['author']; ?></td>
+	   <td><?php echo $book['price']; ?></td>
+	</tr>
+       <?php
+	 }
+       }
+       else{
+	?>
+	 <tr>
+	   <td>No Data Found.</td>
+	 </tr>
+	<?php
+	}
+      ?>	
+      </table>
+   </body>
+</html>
+
+------------
