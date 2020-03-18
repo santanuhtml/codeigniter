@@ -1,0 +1,22 @@
+codeigniter Blog
+--------------------------
+Create Database
+--------------------------
+i.    Atfirst creating Database called "my_blog_application"
+------------
+Note:Now we will create some of tabel to do this project
+------------
+ii.   Creating a tabel called "users" for the admin with coloum 3
+
+iii.  Name - user_id       |  Index - PRIMARY      |  A_I - [OK]
+      Name - username      |  Type - VARCHAR       |  Length - 100
+      Name - password      |  Type - VARCHAR       |  Length - 100
+
+iv.   For a admin we insert a value like:
+      admin	| 123456
+
+--------------------------
+Creating Login Page
+--------------------------
+i.    To create login page create controller "Login.php" page
+
