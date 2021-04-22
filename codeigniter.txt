@@ -7,15 +7,15 @@ C = Controller  [It controls the communication between Model and View & all busi
 
 Folders in codeigniter:
 
-application  [We will work our most of the work in it.]
-system       [Never touch this folder]
-user_guide   [documentation of codeigniter]
+[]application  [We will work our most of the work in it.]
+[]system       [Never touch this folder]
+[]user_guide   [documentation of codeigniter]
    -> index.html
 index.php
 
 Mostly used folder on it:
 
-application
+[]application
    -> config
    -> models [M]
    -> views  [V]
