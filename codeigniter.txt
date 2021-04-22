@@ -61,7 +61,7 @@ and edit it:
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class test extends CI_Controller {     // here welcome replaced by test
+class test extends CI_Controller {     // NOTE: here welcome replaced by test
 
 	/**
 	 * Index Page for this controller.
@@ -80,7 +80,7 @@ class test extends CI_Controller {     // here welcome replaced by test
 	 */
 	public function index()
 	{
-		echo "test";      // this line comes in place of below line.
+		echo "test";      // NOTE: this line comes in place of below line.
 		//$this->load->view('welcome_message');
 	}
 }
