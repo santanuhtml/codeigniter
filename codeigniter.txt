@@ -197,9 +197,9 @@ After this if our BASE URL run proprely then our
 configuretion is done.
 
 --------------------------
-Controller
-1.how to create Controller
-2.how to use Controller
+   *** CONTROLLER ***
+   1.how to create Controller
+   2.how to use Controller
 --------------------------
 note:
 When we create a new Controller file in codeigniter 3
@@ -255,7 +255,7 @@ ii.  but if we don't use "/newTestMethod" only use this:
      will be display.
 
 --------------------------
-Views
+     *** VIEWS ***
 --------------------------
 In codeigniter to view any page we need to keep this 
 file under 'view' folder and have to call this file
@@ -298,7 +298,7 @@ Note:here we don't need this method name because we
 call this view page under index method.
 
 --------------------------
-Display value under Views
+*** Display DATA Under View ***
 --------------------------
 STEP1:
 We may add some of data under index method.
@@ -359,7 +359,7 @@ $this->load->view('fileName', $dataVariableName);
 
 
 --------------------------
-Model
+ *** MODEL ***
 --------------------------
 i.   Under Model we will use database related work.
 ii.  When we create a new modal file in codeigniter 3
