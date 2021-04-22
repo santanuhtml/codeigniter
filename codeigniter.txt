@@ -17,9 +17,9 @@ Mostly used folder on it:
 
 application
    -> config
-   -> controllers
-   -> models
-   -> views
+   -> models [M]
+   -> views  [V]
+   -> controllers [C]
 
 --------------------------
 Welcome.php
