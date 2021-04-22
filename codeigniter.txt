@@ -134,6 +134,9 @@ NOW IT WORKS LIKE
 ------------
 projectName/index.php/controller/method/parameter
 ------------
+Note: 
+controller => Here controller is Selected file under controller folder like "welcome.php" OR "test.php"
+Method => Here function is called Method
 here 'parameter' is default
 example1:
 ------------
