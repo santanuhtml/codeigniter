@@ -228,6 +228,44 @@ CODE:
 
 ------
 
+And also load this model in our controller page "Login.php" using
+
+/* calling model which contain the login database value */
+$this->load->model('User_model');
+
+So the updated code of "Login.php" is:
+CODE
+----------
+
+<?php
+	class Login extends CI_controller{
+	  /* Default Method */
+	  function index(){
+
+	  	/* calling model which contain the login database value */
+	  	$this->load->model('User_model');
+
+	  	/* Calling Form Validation Library */
+	  	$this->load->library('form_validation');
+
+	  	/* Setting Login form rules */
+	  	$this->form_validation->set_rules('username', 'User Name', 'required');
+                $this->form_validation->set_rules('password', 'PassWord', 'required');
+
+
+      /* If form did not validate then login form shown */
+      if($this->form_validation->run() == false){
+  			$this->load->view('admin/login.php');
+      }
+      /* If form validate then Dashboard shown */
+      else{
+	echo "Form Validated Successfully";
+	  }
+
+	}
+     }
+?>
+
 
 
 
