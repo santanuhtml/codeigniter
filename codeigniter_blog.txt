@@ -288,7 +288,23 @@ CODE
      }
 ?>
 
+--------
+And with it we also add error message just before the <form> tage
+CODE
+--------
 
+<!-- Error Messgae if input was worng -->
+  <?php $errorMsg = $this->session->userdata('errorMsg'); ?>
+  <?php if(!empty($errorMsg)){ ?>
+  <div class="alert alert-danger" role="alert">
+    <?php echo $errorMsg; ?>
+  </div>
+  <?php } ?>
+  <!-- /Error Messgae if input was worng -->
+  
+ --------
+	  
+	  
 
 
 
