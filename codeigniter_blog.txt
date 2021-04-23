@@ -44,7 +44,7 @@ vii. and enter our BASE URL in application->config->config.php
      
      TO
      
-     $config['base_url'] = 'http://localhost/codeIgniter-blog/';
+     $config['base_url'] = 'http://localhost/codeIgniter-blog/index.php';
 
 
 --------------------------
@@ -106,9 +106,9 @@ CODE
         <div class="col-md-4 col-md-offset-4">
           <br><br>
           <h2 class="text-center">Please Sign In</h2>
-          <form action="<?php echo base_url().'login/index'; ?>" name="loginForm" id="loginForm" method="post">
+          <form action="<?php echo base_url().'Login/'; ?>" name="loginForm" id="loginForm" method="post">
             <div class="form-group">
-              <input type="email" class="form-control" id="username" name="username" placeholder="Enter User Name">
+              <input type="text" class="form-control" id="username" name="username" placeholder="Enter User Name">
             </div>
             <div class="form-group">
               <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
