@@ -208,8 +208,25 @@ CODE
 --------------------------
 
 --------------------------
-NOTE: Now We will connect this Login form with our "users" table of our Data base so that we can get Proper user login.
-      For that create a page called "User_model.php" under []model folder.
+NOTE: Now We will connect this Login form with our "users" table of our Database so that we can get Proper user login.
+      For that create a page called "User_model.php" under []model folder and placed the code:
+CODE:
+--------
+
+<?php
+  class User_model extends CI_model{
+    function doLogin($username, $password){
+    	$this->db->where('username', $username); // username => are the table "users" field name
+    	$this->db->where('password', $password); // password => are the table "users" field name
+    	$query = $this->db->get('users');
+	// SELECT * FROM users WHERE username = {} AND password = {}
+	$user = $query->row_array();
+	return $user;
+    }
+  }
+?>
+
+------
 
 
 
