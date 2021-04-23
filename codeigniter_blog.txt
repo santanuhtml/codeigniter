@@ -52,7 +52,7 @@ viii. Load the Database everywere
 
           TO
 
-     $autoload['libraries'] = array('database');
+     $autoload['libraries'] = array('database', 'session');
 
 --------------------------
 2. File Setup for Login Page
@@ -240,6 +240,8 @@ And also load this model in our controller page "Login.php" using
 /* calling model which contain the login database value */
 $this->load->model('User_model');
 
+Also here we update our else{ } code
+
 So the updated code of "Login.php" is:
 CODE
 ----------
@@ -266,8 +268,21 @@ CODE
       }
       /* If form validate then Dashboard shown */
       else{
-	echo "Form Validated Successfully";
-	  }
+			  
+	      	$username = $this->input->post('username');
+	      	$password = $this->input->post('password');
+	      	$user = $this->User_model->doLogin($username,$password);
+
+	      	if (!empty($user)) {
+	      		$this->session->set_userdata('user',$user);
+	      		redirect(base_url(). 'adminDashboard');
+	      	}
+	      	else{
+	      		$this->session->set_flashdata('errorMsg','Eigher Username/Password is incorrect.');
+	      		redirect(base_url(). 'login');
+	      	}
+
+	     }
 
 	}
      }
