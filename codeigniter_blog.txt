@@ -213,7 +213,7 @@ CODE
 </form>
 
 --------------------------
-
+Connect with database
 --------------------------
 NOTE: Now We will connect this Login form with our "users" table of our Database so that we can get Proper user login.
       For that create a page called "User_model.php" under []model folder and placed the code:
