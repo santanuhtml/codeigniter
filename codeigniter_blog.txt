@@ -2,8 +2,8 @@ codeigniter Blog
 1. Create Database for Admin LOGIN
 2. File Setup for Login Page
 3. Login Form Validation
-
-
+4. AdminDashboard
+5.  .htaccess
 
 --------------------------
 1. Create Database for Admin LOGIN
@@ -305,6 +305,8 @@ CODE
  --------
 
 --------------------------
+4. AdminDashboard
+
 Finally we create another controller called "AdminDashboard.php" under []controller for Admin Dashboard
 --------------------------
 CODE:
@@ -329,7 +331,7 @@ CODE:
 ?>
 	  
 ---------
-.htaccess
+5.  .htaccess
 
 ADD .htaccess File to remove index.php in the project root file
 ---------
