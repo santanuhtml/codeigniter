@@ -1,6 +1,7 @@
 codeigniter Blog
 1. Create Database for Admin LOGIN
 2. File Setup for Login Page
+3. Login Form Validation
 
 
 
@@ -92,10 +93,10 @@ CODE
           <h2 class="text-center">Please Sign In</h2>
           <form>
             <div class="form-group">
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+              <input type="email" class="form-control" id="username" name="username" placeholder="Enter User Name">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
           </form>
@@ -134,9 +135,13 @@ CODE
 </html>
 ---------
 
+NOTE: In this LOGIN form we use our Database "users" table details like: username, passward in "id" and "name" attribute of the LOGIN form.
 
+--------------------------
+3. Login Form Validation
+--------------------------
+For form validation we need to load our FORM VALIDATION LIBARY in Controller "Login.php" page using:
 
-
-
+$this->load->library('form_validation');
 
 
