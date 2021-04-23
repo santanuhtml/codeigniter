@@ -15,6 +15,14 @@ iii.  Name - user_id       |  Index - PRIMARY      |  A_I - [OK]
 iv.   For a admin we insert a value like:
       admin	| 123456
 
+
+--------------------------
+Creating login Page for VIEW
+--------------------------
+1. Create a folder called "admin" under []view folder
+ii. Under []admin folder create a file "login.php" 
+
+
 --------------------------
 Creating Login Page
 --------------------------
