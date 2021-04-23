@@ -24,7 +24,21 @@ ii. Under []admin folder create a file "login.php"
 
 
 --------------------------
-Creating Login Page
+Creating Login Page for Controller
 --------------------------
-i.    To create login page create controller "Login.php" page
+i.    Now create login page called "Login.php" for Controller
+ii.   Now under controller page called the View login page.
+------------------
+CODE
+------------------
 
+<?php
+	class Login extends CI_controller{
+	  /* Default Method */
+	  function index(){
+	    $this->load->view('admin/login.php');
+	  }
+	}
+?>
+
+------------------
