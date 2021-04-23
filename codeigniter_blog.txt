@@ -46,6 +46,13 @@ vii. and enter our BASE URL in application->config->config.php
      
      $config['base_url'] = 'http://localhost/codeIgniter-blog/index.php';
 
+viii. Load the Database everywere
+
+     $autoload['libraries'] = array();
+
+          TO
+
+     $autoload['libraries'] = array('database');
 
 --------------------------
 2. File Setup for Login Page
