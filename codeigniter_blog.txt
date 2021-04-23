@@ -106,7 +106,7 @@ CODE
         <div class="col-md-4 col-md-offset-4">
           <br><br>
           <h2 class="text-center">Please Sign In</h2>
-          <form>
+          <form action="<?php echo base_url().'login/index'; ?>" name="loginForm" id="loginForm" method="post">
             <div class="form-group">
               <input type="email" class="form-control" id="username" name="username" placeholder="Enter User Name">
             </div>
@@ -148,9 +148,12 @@ CODE
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>
+
 ---------
 
-NOTE: In this LOGIN form we use our Database "users" table details like: username, passward in "id" and "name" attribute of the LOGIN form.
+NOTE: (i) In this LOGIN form we use our Database "users" table details like: username, passward in "id" and "name" attribute of the LOGIN form.
+      
+      (ii) Also from action, method, name, id set here
 
 --------------------------
 3. Login Form Validation
