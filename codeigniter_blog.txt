@@ -20,6 +20,16 @@ iii.  Name - user_id       |  Index - PRIMARY      |  A_I - [OK]
 iv.   For a admin we insert a value like:
       admin	| 123456
 
+V. Now we have to config our database for this visit
+   []config -> database.php
+
+---------
+'hostname' => 'localhost',
+'username' => 'root',
+'password' => '',
+'database' => 'my_blog_application',
+'dbdriver' => 'mysqli',
+---------
 
 --------------------------
 2. File Setup for Login Page
