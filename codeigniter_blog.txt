@@ -156,10 +156,51 @@ NOTE: (i) In this LOGIN form we use our Database "users" table details like: use
       (ii) Also from action, method, name, id set here
 
 --------------------------
-3. Login Form Validation
+3. Login Form Validation 
 --------------------------
-For form validation we need to load our FORM VALIDATION LIBARY in Controller "Login.php" page using:
+For form validation we need to load our FORM VALIDATION LIBARY in Controller "Login.php" page.
+CODE
+----------
 
-$this->load->library('form_validation');
+<?php
+	class Login extends CI_controller{
+	  /* Default Method */
+	  function index(){
+	  	/* Calling Form Validation Library */
+	  	$this->load->library('form_validation');
+
+	  	/* Setting Login form rules */
+	  	$this->form_validation->set_rules('username', 'User Name', 'required');
+                $this->form_validation->set_rules('password', 'PassWord', 'required');
 
 
+                /* If form did not validate then login form shown */
+                 if($this->form_validation->run() == false){
+  			$this->load->view('admin/login.php');
+                  }
+                 /* If form validate then Dashboard shown */
+                 else{
+			  echo "Form Validated Successfully";
+			}
+
+	      }
+	}
+?>
+
+--------------------------
+And also we add validation message on Login Form
+--------------------------
+CODE
+-----
+
+<form action="<?php echo base_url().'Login/'; ?>" name="loginForm" id="loginForm" method="post">
+<div class="form-group">
+  <input type="text" class="form-control" id="username" value="<?php echo set_value('username'); ?>" name="username" placeholder="Enter User Name">
+  <p><?php echo form_error('username'); ?></p>
+</div>
+<div class="form-group">
+  <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+  <p><?php echo form_error('password'); ?></p>
+</div>
+<button type="submit" class="btn btn-primary btn-block">Submit</button>
+</form>
