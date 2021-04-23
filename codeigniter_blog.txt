@@ -329,6 +329,22 @@ CODE:
 ?>
 	  
 ---------
+.htaccess
 
-
-
+ADD .htaccess File to remove index.php in the project root file
+---------
+CODE:
+---------
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /codeIgniter-blog
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
+---------
+Note: * After upload the project localhost to the surver then just remove the "codeIgniter-blog" and it becomes
+      	RewriteBase /
+	
+	
+	
