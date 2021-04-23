@@ -204,3 +204,15 @@ CODE
 </div>
 <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
+
+--------------------------
+
+--------------------------
+NOTE: Now We will connect this Login form with our "users" table of our Data base so that we can get Proper user login.
+      For that create a page called "User_model.php" under []model folder.
+
+
+
+
+
+
