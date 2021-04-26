@@ -381,7 +381,7 @@ ii. After checking this code, We have to Finally crate Admin Dashboard called "d
 	       <link href="<?php echo base_url() ?>assets/css/dashboard.css" rel="stylesheet">
 	  
 	 
-	 
+	  (III) After File setup we can edit the Admin Dashboard as our need.
   
        
 
