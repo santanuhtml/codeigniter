@@ -206,7 +206,7 @@ CODE
   <p><?php echo form_error('username'); ?></p>
 </div>
 <div class="form-group">
-  <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+  <input type="password" class="form-control" id="password" value="<?php echo set_value('password'); ?>" name="password" placeholder="Enter Password">
   <p><?php echo form_error('password'); ?></p>
 </div>
 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -270,7 +270,7 @@ CODE
       else{
 			  
 	      	$username = $this->input->post('username');
-	      	$password = $this->input->post('password');
+	      	$password = md5($this->input->post('password'));
 	      	$user = $this->User_model->doLogin($username,$password);
 
 	      	if (!empty($user)) {
