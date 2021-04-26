@@ -361,7 +361,29 @@ ii. After checking this code, We have to Finally crate Admin Dashboard called "d
 	}
     ?>
  ---------   
-    
+  
+  iii. *** Now select any Dashboard Desing as our need and place this code under the page "dashboard.php" ***
+  	 
+	 (I) To keep our Dashboard related JS and CSS external code, We can create a []folder called "assets"    
+	     and keep all external files.
+	     
+	 (II)  We can call them using:
+	 
+	       <?php echo base_url() ?>assets/
+	       
+	       in our "dashboard.php" page.
+	       
+	       EXAMPLE:
+	       Befor:
+	       <link href="dashboard.css" rel="stylesheet">
+	       
+	       After:
+	       <link href="<?php echo base_url() ?>assets/css/dashboard.css" rel="stylesheet">
+	  
+	 
+	 
+  
+       
 
 	  
 ---------
