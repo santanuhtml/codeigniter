@@ -2,7 +2,7 @@ codeigniter Blog
 1. Create Database for Admin LOGIN
 2. File Setup for Login Page
 3. Login Form Validation
-4. AdminDashboard
+4. Admin Dashboard
 5.  .htaccess
 
 --------------------------
@@ -307,7 +307,7 @@ CODE
 --------------------------
 4. AdminDashboard
 
-Finally we create another controller called "AdminDashboard.php" under []controller for Admin Dashboard
+i. Finally we create another controller called "AdminDashboard.php" under []controller for Admin Dashboard
 --------------------------
 CODE:
 ---------
@@ -329,6 +329,40 @@ CODE:
 	  }
 	}
 ?>
+
+---------
+
+ii. After checking this code, We have to Finally crate Admin Dashboard called "dashboard.php" under []views
+    []views -> []admin -> dashboard.php
+    
+    And call this "dashboard.php" view page in "AdminDashboard.php" COLLECTORS page.
+    Updated code of "AdminDashboard.php"
+    CODE:
+    ----------
+    
+    <?php
+	class AdminDashboard extends CI_controller{
+	  /* Default Method */
+	  function index(){
+
+	  	// echo "I am logged in Now";
+	  	// if (empty($this->session->userdata['user'])) {
+	  	// 	redirect(base_url().'login');
+	  	// }
+	  	// echo "<a href='".base_url().'adminDashboard/signOut'."'>Sign Out</a>";
+
+	  	$this->load->view('admin/dashboard');
+
+	  }
+	  function signOut(){
+	  	$this->session->unset_userdata('user');
+	  	redirect(base_url().'login');
+	  }
+	}
+    ?>
+ ---------   
+    
+
 	  
 ---------
 5.  .htaccess
@@ -349,4 +383,5 @@ Note: * After upload the project localhost to the surver then just remove the "c
       	RewriteBase /
 	
 	
-	
+--------------------------
+
