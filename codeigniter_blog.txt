@@ -44,7 +44,7 @@ vii. and enter our BASE URL in application->config->config.php
      
      TO
      
-     $config['base_url'] = 'http://localhost/codeIgniter-blog/index.php';
+     $config['base_url'] = 'http://localhost/codeIgniter-blog/';
 
 viii. Load the Database everywere
 
