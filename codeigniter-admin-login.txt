@@ -1,0 +1,500 @@
+Index
+1. Creating Database & Configure
+2. Setup AdminLTE template for Admin Panel
+3. Create Admin Table in Database for admin login
+4. Create VIEW & CONTROLLERS page for Admin Panel login
+5. Setup AdminLTE template for Login Page
+6. Setup Admin MODEL to connect Database "admins" table
+7. Setup From Validation 
+8. Logout Option
+9. Checking Admin Loggedin
+
+-----------------------
+1. Creating Database & Configure
+-----------------------
+i. Creating a Database called "codeIgniter_app"
+
+------------
+Configur
+------------
+
+ii. Base URL:
+		To set base url visit []project -> []application -> []config -> config.php
+
+		and change:
+
+		$config['base_url'] = '';
+
+		To
+
+		$config['base_url'] = 'http://localhost/codeIgniterWebApplication/';
+
+
+iii. Database Setup:
+     To set Database visit []project -> []application -> []config -> database.php
+
+     and change:
+
+     
+	   'hostname' => 'localhost',
+	   'username' => '',
+	   'password' => '',
+	   'database' => '',
+	   'dbdriver' => 'mysqli',
+
+
+	   To
+
+
+	   'hostname' => 'localhost',
+	   'username' => 'root',
+	   'password' => '',
+	   'database' => 'codeigniter_app',
+	   'dbdriver' => 'mysqli',
+
+
+	iv. Auto Load Setup:
+	    To set Database visit []project -> []application -> []config -> autoload.php
+
+	    (i)  and change:
+
+	    		 $autoload['libraries'] = array();
+
+	    		TO
+
+	    		$autoload['libraries'] = array('database', 'session');
+
+
+	   (ii)  And also change:
+
+	   			$autoload['helper'] = array();
+
+	   			TO
+
+	   			$autoload['helper'] = array('url');
+
+	v. .htaccess Setup:
+	    Create a file called ".htaccess" and place the code
+	    CODE
+	    --------
+
+	    <IfModule mod_rewrite.c>
+			RewriteEngine On
+			RewriteBase /codeIgniterWebApplication
+			RewriteCond %{REQUEST_FILENAME} !-f
+			RewriteCond %{REQUEST_FILENAME} !-d
+			RewriteRule ^(.*)$ index.php?/$1 [L]
+		</IfModule>
+
+			--------
+
+
+-----------------------
+2. Setup AdminLTE template for Admin Panel
+-----------------------
+
+i. Atfirst we have to download  AdminLTE template. 
+	 In this template we will use "starter.html" file so that we have to
+	 Setup some of new folders
+
+
+ii. First create a folder called "public" in root of the project
+
+iii. Again create another folder called "admin" under []public
+		 In this []admin folder we will setup our All 'js','css','html' related files
+		 which are need for the "starter.html"
+
+iv. Under []admin folder we have to copy folder "dist" & "plugins" from AdminLTE template.
+
+
+----------
+VIEW
+----------
+
+v. Now we have to create a VIEW PAGE for admin
+   
+    (i) Create a folder "admin" under folder []views , where we keep our Admin related VIEW PAGES.
+
+    		[]application -> []views -> []admin
+
+
+
+    (ii) Now creating a file called "dashboard.php" under []application -> []views -> []admin -> dashboard.php
+
+    (iii) After this copy the source code of "starter.html" in newly created "dashboard.php"
+
+
+
+----------
+CONTROLLER
+----------
+
+vi.  Now to see this "dashboard.php" page design create a CONTROLLER PAGE for admin
+
+		 (i) Create a folder "admin" under folder []controllers , where we keep our Admin related CONTROLLERS.
+
+		 		[]application -> []controllers -> []admin
+
+		 (ii) Now create a file called "Home.php" under []application -> []controllers -> []admin -> Home.php
+
+
+		 (iii) Place the Code given below:
+		 CODE
+		 -------
+		 <?php
+				defined('BASEPATH') OR exit('No direct script access allowed');
+				
+				class Home extends CI_Controller{
+					public function index(){
+						$this->load->view('admin/dashboard');
+					}
+
+				}
+			?>
+			-------
+
+			And check it in this link:
+
+			http://localhost/codeIgniterWebApplication/admin/Home
+
+			(iv) Here we see the Dashboard do not work properly. To short out it we have to
+			     Setup the base_url()
+
+			     Add the base_url() code on js and css links of "dashboard.php"
+
+			    <?php echo base_url() ?>public/admin/
+
+			    Example:
+
+			    <script src="plugins/jquery/jquery.min.js"></script>
+
+			    TO
+
+			    <script src="<?php echo base_url() ?>public/admin/plugins/jquery/jquery.min.js"></script>
+
+			(v) *** Edit dashboard.php page as our need.
+
+			
+
+
+-----------------------
+3. Create Admin Table in Database for admin login
+-----------------------
+
+i. Create a new table called "admins" with 5 filds
+
+
+
+	 Name 																				defalt	
+
+	 id 							Primary			A_I [OK]
+
+	 username					Varchar			100
+
+	 password					Varchar			150
+
+	 status						INT					1								As defined: 1
+
+	 created_at   		DATE        Null Index [OK]
+
+
+	 [SAVE]
+
+
+ii. Insert  a Default Login User and Password:
+		
+		username ->admin
+		password ->$2y$10$A5.5w.utV8AEQKkKfZCe6ulgOJQH6vzzg6xh7bfSIEgx7uP0xyeiq
+
+		Note: password is generated using a code under any CONTROLLER
+		      echo password_hash('admin',PASSWORD_DEFAULT);
+
+
+-----------------------
+4. Create VIEW & CONTROLLERS page for Admin Panel login
+-----------------------
+i.  For Admin panel login page create a "login.php" file.
+    Root of it:
+
+    []application -> []views -> []admin -> login.php
+
+
+ii.  And To access this login page We need to create CONTROLLER "Login.php" page
+     Root of it:
+
+     []application -> []controllers -> []admin -> Login.php
+
+
+     CODE:
+     -----------
+     <?php
+				defined('BASEPATH') OR exit('No direct script access allowed');
+				
+				class Login extends CI_Controller{
+					public function index(){
+						$this->load->view('admin/login');
+					}
+
+				}
+			?>
+     -----------
+
+     LINK:
+     http://localhost/codeIgniterWebApplication/admin/Login
+
+
+-----------------------
+5. Setup AdminLTE template for Login Page
+-----------------------
+i. 		To get the design of AdminLTE login page visit the "login.html" page of AdminLTE
+			and get the SOURCE CODE of it and past on "login.php" of VIEW.
+
+ii. 	Here we see the "login.php" do not work properly. To short out it we have to
+			Setup the base_url()
+
+			Add the base_url() code on js and css links of "dashboard.php"
+			CODE:
+
+			<?php echo base_url() ?>public/admin/
+
+
+iii.  *** Edit login.php page as our need.
+
+
+iv.  SETUP LOGIN FIELDS:
+			
+			(i) On form tag we add action, name, id, method
+
+			(ii) On the Input Fields we take name, id related to "admins" table
+	
+		CODE:
+		-----------
+			
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CI Web Application</title>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>public/admin/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>CI Web Application</b></a>
+  </div>
+  <?php
+    if (!empty($this->session->flashdata('msg'))) {
+      echo "<div class='alert alert-danger'>".$this->session->flashdata('msg')."</div>";
+    }
+  ?>
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+      <form action="<?php echo base_url(). 'admin/login/authenticate' ?>" name="loginForm" id="loginForm" method="post">
+        <div class="input-group mb-3">
+          <input type="text" name="username" id="username" value="<?php echo set_value('username'); ?>" class="form-control" placeholder="User Name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <?php echo form_error('username'); ?>
+        <div class="input-group mb-3">
+          <input type="password" name="password" id="password" value="<?php echo set_value('password'); ?>" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <?php echo form_error('password'); ?>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="<?php echo base_url() ?>public/admin/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url() ?>public/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url() ?>public/admin/dist/js/adminlte.min.js"></script>
+</body>
+</html>
+
+-------------
+
+
+-----------------------
+6. Setup Admin MODEL to connect Database "admins" table
+-----------------------
+i. Create new file called "Admin_model.php" under []models folder.
+	 and code of it given below.
+	 CODE
+
+	-------
+
+<?php
+	defined('BASEPATH') OR exit('No direct script access allowed');
+	
+	class Admin_model extends CI_Model{
+		public function getByUsername($username){
+			$this->db->where('username', $username);
+			$admin = $this->db->get('admins')->row_array();
+			// SELECT * FROM admins WHERE username = {}
+			return $admin;
+		}
+
+	}
+?>
+
+	-------
+
+-----------------------
+7. Setup From Validation 
+-----------------------
+On "Login.php" page under CONTROLLERS we will validate our Login form using 
+another method called "authenticate()".
+Then The Updated code is:
+CODE
+----------
+
+<?php
+	defined('BASEPATH') OR exit('No direct script access allowed');
+	
+	class Login extends CI_Controller{
+
+		public function index(){
+			//echo password_hash('admin',PASSWORD_DEFAULT);
+			$this->load->library('form_validation');
+			$this->load->view('admin/login');
+		}
+
+		public function authenticate(){
+			$this->load->library('form_validation');
+			$this->load->model('Admin_model');
+
+			$this->form_validation->set_rules('username', 'Username', 'trim|required');
+      $this->form_validation->set_rules('password', 'Password', 'trim|required');
+      if ($this->form_validation->run() == true) {
+      	//success
+        $username = $this->input->post('username');
+        $admin = $this->Admin_model->getByUsername($username);
+        //print_r($admin);
+        if (!empty($admin)){
+            $password = $this->input->post('password');
+            if (password_verify($password, $admin['password']) == true) {
+               $adminArray['admin_id'] = $admin['id'];
+               $adminArray['username'] = $admin['username'];
+               $this->session->set_userdata('admin', $adminArray);
+               redirect(base_url().'admin/home/index');
+            }
+            else{
+              $this->session->set_flashdata('msg','Either Username or Password is incorrect');
+              redirect(base_url().'admin/login/index');
+            }
+        }
+        else{
+          $this->session->set_flashdata('msg','Either Username or Password is incorrect');
+          redirect(base_url().'admin/login/index');
+        }
+
+      }
+      else{
+      	$this->load->view('admin/login');
+      }
+		}
+
+    function logout(){
+      $this->session->unset_userdata('admin');
+      redirect(base_url().'admin/login/index');
+    }
+
+	}
+?>
+
+
+-----------------------
+8. Logout Option
+-----------------------
+
+<a href="<?php echo base_url().'admin/login/logout'; ?>" class="dropdown-item">
+  Logout
+</a>
+
+
+-----------------------
+9. Checking Admin Loggedin
+-----------------------
+Now We have to add a Constructor in "Home.php" of CONTROLLER which will check
+any user visit Dashboard after creating a Session or Not!
+So the Updated code of "Home.php" is
+CODE
+-----------
+
+
+<?php
+	defined('BASEPATH') OR exit('No direct script access allowed');
+	
+	class Home extends CI_Controller{
+
+		// Only For Admin after login
+		public function __construct(){
+			parent::__construct();
+			$admin = $this->session->userdata('admin');
+			if (empty($admin)) {
+				$this->session->set_flashdata('msg','Your session has been expired');
+				redirect(base_url().'admin/login/index');
+			}
+		}
+		// END Only For Admin after login
+
+		public function index(){
+			//Two line given below Just for Check the SESSION which will happen after develop code of "Login.php"
+			//$admin = $this->session->userdata('admin');
+			//print_r($admin);
+			$this->load->view('admin/dashboard');
+		}
+
+	}
+?>
+
+-----------
+
+Note: If we want that any page of our project that only Admin will see 
+then we will add this code in that CONTROLLER where the View page is calling
+CODE
+-----------
+
+// Only For Admin after login
+public function __construct(){
+	parent::__construct();
+	$admin = $this->session->userdata('admin');
+	if (empty($admin)) {
+		$this->session->set_flashdata('msg','Your session has been expired');
+		redirect(base_url().'admin/login/index');
+	}
+}
+// END Only For Admin after login
+
+-----------
