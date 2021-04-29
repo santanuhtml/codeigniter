@@ -185,15 +185,15 @@ i. Create a new table called "admins" with 5 filds
 
 
 
-	 Name 																				defalt	
+	 Name 								defalt	
 
-	 id 							Primary			A_I [OK]
+	 id 			Primary			A_I [OK]
 
-	 username					Varchar			100
+	 username		Varchar			100
 
-	 password					Varchar			150
+	 password		Varchar			150
 
-	 status						INT					1								As defined: 1
+	 status			INT			1		As defined: 1
 
 	 created_at   		DATE        Null Index [OK]
 
